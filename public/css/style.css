@@ -1,0 +1,327 @@
+body {
+    /* background */
+    background-color: rgb(0, 0, 0);
+    font-size: 16px;
+
+    /* warna font */
+    color: black;
+    font-family:
+        "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+        Arial, sans-serif;
+}
+
+a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none; /* opsional */
+}
+
+.container,
+h3,
+h2,
+h1,
+p,
+h5 {
+    color: rgb(255, 255, 255);
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.konten-ditengah {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* banner home */
+.banner-img {
+    height: clamp(400px, 80vh, calc(100vh - 60px));
+    object-fit: cover;
+}
+
+/* MOBILE → JANGAN DIPOTONG */
+@media (max-width: 576px) {
+    .banner-img {
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+/* corousel */
+.carousel .carousel-item .card {
+    width: 512px;
+    height: 450px;
+    margin: auto; /* Untuk center di kolom */
+    border: #000;
+}
+
+.carousel .carousel-item .card-img-top {
+    width: 100%;
+    height: 80%; /* Atur sesuai rasio */
+    object-fit: cover;
+}
+
+.carousel .carousel-item .card-body {
+    height: 30%; /* Sisanya untuk teks */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #000;
+    margin-bottom: 0px;
+}
+
+.carousel .carousel-item .col-md-4 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/* ukuran foto */
+.image-card {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* sama kayak 512x683 */
+    overflow: hidden;
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ini kunci utamanya */
+    display: block;
+}
+
+.image-card-43 {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* 792:594 */
+    overflow: hidden;
+}
+
+.img-cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1680 / 1120;
+    object-fit: cover;
+}
+
+.image-card-43 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* crop biar rapi */
+    display: block;
+}
+
+.img-792 {
+    width: 100%;
+    max-width: 792px;
+    aspect-ratio: 792 / 594;
+    object-fit: cover;
+}
+
+.img-512-tall {
+    width: 100%;
+    max-width: 512px;
+    aspect-ratio: 512 / 683;
+    object-fit: cover;
+}
+
+.img-512-short {
+    width: 100%;
+    max-width: 512px;
+    aspect-ratio: 512 / 384;
+    object-fit: cover;
+}
+
+.img-1680 {
+    width: 100%;
+    max-width: 1680px;
+    aspect-ratio: 1680 / 1120;
+    object-fit: cover;
+}
+
+/* carouselnya */
+.client-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.client-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: scrollClient 20s linear infinite;
+}
+
+.client-item {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .client-item {
+        width: 180px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .client-item {
+        width: 200px;
+    }
+}
+
+.client-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: 0.3s;
+}
+
+.client-card:hover {
+    transform: translateY(-5px);
+}
+
+.client-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+}
+
+.client-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ANIMASI AUTO */
+@keyframes scrollClient {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ukuran single post */
+.image-portrait {
+    width: 100%;
+    aspect-ratio: 840 / 868; /* jaga rasio */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.image-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* biar gak gepeng */
+}
+
+.image-landscape {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.image-landscape img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+footer a {
+    color: white;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    opacity: 0.7;
+}
+
+/* navbar */
+.custom-navbar {
+    background: transparent !important; /* full transparan */
+    box-shadow: none;
+}
+
+/* biar teks tetap kelihatan */
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand {
+    color: #fff !important;
+}
+
+/* hover */
+.custom-navbar .nav-link:hover {
+    color: #ddd !important;
+}
+
+.custom-offcanvas {
+    background: rgba(40, 40, 40, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+}
+
+.dark-mode {
+    background: rgba(20, 20, 20, 0.9);
+}
+
+.light-mode {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+.custom-offcanvas {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.custom-offcanvas .nav-link {
+    font-size: 16px;
+    padding: 8px 0;
+}
+
+.custom-offcanvas .nav-link.active {
+    font-weight: 600;
+    color: #fff;
+}
+
+.custom-offcanvas .dropdown-menu {
+    background: #2f2f2f;
+    border: none;
+}
+
+.custom-offcanvas .dropdown-item {
+    color: #fff;
+}
+
+.custom-offcanvas .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* register */
+.form-registration .form-control {
+    border-radius: 8px;
+}
+
+.card {
+    border-radius: 16px;
+}
+
+.btn-primary {
+    border-radius: 8px;
+}

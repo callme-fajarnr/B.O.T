@@ -1,0 +1,197 @@
+{{ dd($post); }}
+@extends('dashboard.layout.main')
+
+@section('container')
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Edit Post</h1>
+</div>
+
+<div class="col-lg-8">
+<form action="/dashboard/post/{{ $post->slug }}" method="POST" class="mb-5" enctype="multipart/form-data">
+@method('put')
+@csrf
+
+<div class="row">
+
+    {{-- TITLE & SLUG --}}
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" id="tittle"
+            class="form-control @error('tittle') is-invalid @enderror"
+            name="tittle"
+            value="{{ old('tittle', $post->tittle) }}">
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Slug</label>
+        <input type="text" id="slug"
+            class="form-control @error('slug') is-invalid @enderror"
+            name="slug"
+            value="{{ old('slug', $post->slug) }}">
+    </div>
+
+    {{-- CATEGORY --}}
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-select" name="category_id">
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}"
+                    {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    {{-- VIDEO UPLOAD --}}
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Upload Video</label>
+
+        <input type="hidden" name="oldVideo" value="{{ $post->video }}">
+
+        @if($post->video)
+            <video src="{{ asset('storage/'.$post->video) }}"
+                class="video-preview w-100 rounded mb-2"
+                style="max-height:200px;" controls></video>
+        @else
+            <video class="video-preview w-100 rounded mb-2"
+                style="display:none; max-height:200px;" controls></video>
+        @endif
+
+        <input type="file" class="form-control video-input" name="video">
+    </div>
+
+    {{-- YOUTUBE LINK --}}
+    <div class="col-12 mb-3">
+        <label class="form-label">Youtube Link (optional)</label>
+        <input type="text"
+            class="form-control @error('link') is-invalid @enderror"
+            name="link"
+            value="{{ old('link', $post->link) }}">
+        @error('link')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
+    {{-- IMAGES --}}
+    @for ($i = 1; $i <= 5; $i++)
+    @php
+        $field = $i == 1 ? 'image' : 'image'.$i;
+    @endphp
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Image {{ $i }}</label>
+
+        <input type="hidden" name="oldImage{{ $i }}" value="{{ $post->$field }}">
+
+        @if($post->$field)
+            <img src="{{ asset('storage/'.$post->$field) }}"
+                class="img-preview{{ $i }} img-fluid mb-2 rounded"
+                style="height:120px; width:100%; object-fit:cover;">
+        @else
+            <img class="img-preview{{ $i }} img-fluid mb-2 rounded"
+                style="display:none; height:120px; width:100%; object-fit:cover;">
+        @endif
+
+        <input 
+            type="file" 
+            class="form-control" 
+            id="image{{ $i }}"
+            name="{{ $field }}"
+            onchange="previewImage({{ $i }})"
+        >
+    </div>
+    @endfor
+
+    {{-- BODY --}}
+    <div class="col-12 mb-3">
+        <label class="form-label">Body</label>
+        <input id="body" type="hidden" name="body"
+            value="{{ old('body', $post->body) }}">
+        <trix-editor input="body"></trix-editor>
+    </div>
+
+    {{-- CREDIT --}}
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Video & Edit By</label>
+        <input type="text" class="form-control mb-2"
+            name="videoeditby"
+            value="{{ old('videoeditby', $post->videoeditby) }}">
+        <input type="text" class="form-control"
+            name="igvideo"
+            value="{{ old('igvideo', $post->igvideo) }}">
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Photos By</label>
+        <input type="text" class="form-control mb-2"
+            name="photoby"
+            value="{{ old('photoby', $post->photoby) }}">
+        <input type="text" class="form-control"
+            name="igphoto"
+            value="{{ old('igphoto', $post->igphoto) }}">
+    </div>
+
+    {{-- ACTORS --}}
+    @for ($i = 1; $i <= 3; $i++)
+    <div class="col-md-4 mb-3">
+        <label class="form-label">Actor {{ $i }}</label>
+        <input type="text" class="form-control mb-2"
+            name="aktor{{ $i }}"
+            value="{{ old('aktor'.$i, $post->{'aktor'.$i}) }}">
+        <input type="text" class="form-control"
+            name="igaktor{{ $i }}"
+            value="{{ old('igaktor'.$i, $post->{'igaktor'.$i}) }}">
+    </div>
+    @endfor
+
+</div>
+
+<button type="submit" class="btn btn-primary">Update Post</button>
+</form>
+</div>
+
+{{-- ================= JS ================= --}}
+<script>
+
+// AUTO SLUG
+const tittle = document.querySelector('#tittle');
+const slug = document.querySelector('#slug');
+
+tittle.addEventListener('change', function(){
+    fetch('/dashboard/post/checkSlug?tittle=' + tittle.value)
+    .then(res => res.json())
+    .then(data => slug.value = data.slug)
+});
+
+// IMAGE PREVIEW
+function previewImage(i){
+    const input = document.querySelector('#image' + i);
+    const preview = document.querySelector('.img-preview' + i);
+
+    if(input.files && input.files[0]){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// VIDEO PREVIEW
+document.querySelector('.video-input').addEventListener('change', function(){
+    const preview = document.querySelector('.video-preview');
+    const file = this.files[0];
+
+    if(file){
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    }
+});
+
+</script>
+
+@endsection
