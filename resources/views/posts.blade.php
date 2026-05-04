@@ -18,16 +18,21 @@
 @endphp
 
 {{-- ================= HERO ================= --}}
-<div class="container-fluid px-2 px-md-4 py-4">
+<div class="container-fluid px-2 px-md-4 pt-0 pb-4 mt-0">
     <div class="row align-items-stretch g-4">
 
         {{-- TEXT --}}
         <div class="col-12 col-md-6 d-flex flex-column justify-content-between">
 
         {{-- LOGO / IMAGE KECIL --}}
+        @if($company && $company->logo)
         <div>
-            <img src="https://picsum.photos/100/100?" class="mb-3" alt="">
+            <img 
+                src="{{ asset('storage/'.$company->logo) }}" 
+                class="logo-company"
+                alt="logo">
         </div>
+        @endif
 
         {{-- TEXT BAWAH --}}
         <div>

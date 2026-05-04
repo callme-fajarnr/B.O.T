@@ -72,6 +72,13 @@
 
         <ul class="nav flex-column mb-auto">
           <li class="nav-item">
+              <a href="/dashboard/user" class="nav-link d-flex align-items-center gap-2">
+                  <i class="bi bi-people"></i>
+                  Management Akun
+              </a>
+          </li>
+
+          <li class="nav-item">
             <form action="/logout" method="post">
               @csrf
               <button type="submit" class="nav-link px-3 border-0"><i class="bi bi-box-arrow-in-left"></i> Logout</button>

@@ -1,4 +1,4 @@
-<footer class="py-2 bg-dark text-white fixed-bottom">
+<footer class="py-3 bg-dark text-white">
     <div class="container-fluid d-flex justify-content-between align-items-center">
 
         <div>

@@ -143,7 +143,7 @@
 <div class="album py-5 bg-body-dark">
   <div class="container">
     
-    <h3 class="text-center mb-4">Our Clients</h3>
+    <h3 class="text-center mb-4">Category</h3>
 
     <div class="client-wrapper">
       <div class="client-track">

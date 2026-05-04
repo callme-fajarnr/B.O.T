@@ -46,7 +46,7 @@
                 <label class="form-label">Image Banner</label>
 
                 <img class="img-preview img-fluid mb-3 rounded"
-                     style="display:none; max-height:200px;">
+                    style="display:none; max-height:200px;">
 
                 <input type="file"
                     class="form-control @error('image') is-invalid @enderror"

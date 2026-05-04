@@ -1,110 +1,101 @@
-
 @extends('layout.main')
 
 @section('container')
 
-<div class="px-lg-3">
-  <div class="text-left bg-body-dark">
-    <div class="py-lg-5">
-      <div class="d-flex gap-3 justify-content-center lead fw-normal">
-        <a class="icon-link" href="#">
-        </a>
-      </div>
-
-      <div class="py-lg-5">
-        <h1>{{ $about->line_1 }}</h1>
-      </div>
-    </div>
-  </div>
+{{-- SECTION 1 --}}
+<div class="px-lg-3 py-lg-5 bg-body-dark">
+    <h1>{{ $about->line_1 }}</h1>
 </div>
 
-<div class="px-lg-5 py-lg-5">
-  <div class="text-left bg-body-dark">
-    <div class="px-lg-5 py-lg-5">
-      <h3 class="fw-normal text-muted mb-3">{{ $about->line_2  }}</h3>
-    </div>
-  </div>
+{{-- SECTION 2 --}}
+<div class="px-lg-5 py-lg-5 bg-body-dark">
+    <h3 class="fw-normal text-muted mb-3">
+        {{ $about->line_2 }}
+    </h3>
 </div>
 
+{{-- SECTION 3 --}}
 <div class="album py-lg-5 bg-body-dark">
-  <div class="px-lg-5">
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-8">
-      <div class="col">
-        <a href="">
-          <div class="card-body">
-            <h3>SOLO & SIGHT</h3>
-            <p class="card-text py-lg-5">{{ $about->solo_sight }}</p>
-          </div>
-         
-        </a>
-      </div>
-      <div class="col">
-        <a href="/blog/{{ $post[0]->slug }}">
-          @if ($post[0]->image)
-            <img src="{{ asset('storage/' . $post[0]->image) }}" alt="{{ $post[0]->category->name }}" class="img-fluid" width="447px" height="595px">
-            @else
-                <img src="https://picsum.photos/512/683?{{ $post[0]->category->name }}" class="card-img-top" alt="..." width="447px" height="595px">
-            @endif
-          <div class="card-body">
-            <p class="card-text">{{ $post[0]->excerpt }}</p>
-            <h3>{{ $post[0]->tittle }}</h3>
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a href="/blog/{{ $post[1]->slug }}">
-          @if ($post[1]->image)
-            <img src="{{ asset('storage/' . $post[1]->image) }}" alt="{{ $post[1]->category->name }}" class="img-fluid" width="447px" height="595px">
-            @else
-                <img src="https://picsum.photos/512/683?{{ $post[1]->category->name }}" class="card-img-top" alt="..." width="447px" height="595px">
-            @endif
-          <div class="card-body">
-            <p class="card-text">{{ $post[1]->excerpt }}</p>
-            <h3>{{ $post[1]->tittle }}</h3>
-          </div>
-        </a>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="px-lg-5 py-lg-5">
-  <div class="text-left bg-body-dark py-lg-5">
     <div class="px-lg-5">
-      <h3 class="fw-normal text-muted mb-3">{{ $about->line_3 }}</h3>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+            {{-- SOLO --}}
+            <div class="col">
+                <h3>SOLO & SIGHT</h3>
+                <p class="py-lg-5">{{ $about->solo_sight }}</p>
+            </div>
+
+            {{-- POST 1 --}}
+            <div class="col">
+                <a href="/blog/{{ $post[0]->slug }}">
+                    <img 
+                        src="{{ $post[0]->image ? asset('storage/'.$post[0]->image) : 'https://picsum.photos/512/683?'.$post[0]->category->name }}"
+                        class="img-fluid"
+                        width="447" height="595"
+                        alt="{{ $post[0]->category->name }}">
+
+                    <div class="card-body">
+                        <p>{{ $post[0]->excerpt }}</p>
+                        <h3>{{ $post[0]->tittle }}</h3>
+                    </div>
+                </a>
+            </div>
+
+            {{-- POST 2 --}}
+            <div class="col">
+                <a href="/blog/{{ $post[1]->slug }}">
+                    <img 
+                        src="{{ $post[1]->image ? asset('storage/'.$post[1]->image) : 'https://picsum.photos/512/683?'.$post[1]->category->name }}"
+                        class="img-fluid"
+                        width="447" height="595"
+                        alt="{{ $post[1]->category->name }}">
+
+                    <div class="card-body">
+                        <p>{{ $post[1]->excerpt }}</p>
+                        <h3>{{ $post[1]->tittle }}</h3>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
     </div>
-  </div>
 </div>
 
+{{-- SECTION 4 --}}
+<div class="px-lg-5 py-lg-5 bg-body-dark">
+    <h3 class="fw-normal text-muted mb-3">
+        {{ $about->line_3 }}
+    </h3>
+</div>
+
+{{-- SECTION 5 --}}
 <a href="/blog">
-  <div class="album py-lg-5 bg-body-dark">
-    <div class="px-lg-3">
-  
-      <div class="row row-cols-sm-1 row-cols-md-1 g-1">
-        <div class="col-0">
-          <div class="card text-bg-dark text-white">
-            @if ($about->image_about)
-              <img src="{{ asset('storage/' . $about->image_about) }}" class="card-img-top" width="1680" height="1120" alt="Image from DB">
-            @else
-              <img src="https://picsum.photos/1680/1120" class="card-img-top" width="1680" height="1120" alt="Fallback Image">
-            @endif
-            <div class="card-img-overlay d-flex align-content-center flex-wrap">
-              <div class="d-flex flex-column bd-highlight mb-3">
-                <div class="p-2 bd-highlight px-lg-5">
-                  <h4 class="card-title text-left flex-center px-lg-5">See ur latest work</h4>
-                  <h2 class="card-title text-left flex-center px-lg-5">THING WE DID IN THE PAST</h2>
-                  <h2 class="card-title text-left flex-center px-lg-5 py-lg-5 text-decoration-underline">OUR PROJECT</h2>
+    <div class="album py-lg-5 bg-body-dark">
+        <div class="px-lg-3">
+
+            <div class="card text-bg-dark">
+
+                <img 
+                    src="{{ $about->image_about ? asset('storage/'.$about->image_about) : 'https://picsum.photos/1680/1120' }}"
+                    class="card-img-top"
+                    alt="Image">
+
+                <div class="card-img-overlay d-flex align-items-center">
+                    <div class="px-lg-5">
+                        <h4>See ur latest work</h4>
+                        <h2>THING WE DID IN THE PAST</h2>
+                        <h2 class="py-lg-5 text-decoration-underline">
+                            OUR PROJECT
+                        </h2>
+                    </div>
                 </div>
-              </div>
+
             </div>
-          </div>
+
         </div>
-      </div>
-      
     </div>
-  </div>
 </a>
 
 @endsection

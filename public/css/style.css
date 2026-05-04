@@ -55,6 +55,13 @@ h5 {
     object-fit: cover;
 }
 
+/* logo single post */
+.logo-company {
+    width: 100px;
+    height: 100px;
+    object-fit: contain; /* 🔥 tetap utuh & transparan */
+}
+
 /* MOBILE → JANGAN DIPOTONG */
 @media (max-width: 576px) {
     .banner-img {
@@ -222,7 +229,6 @@ h5 {
     width: 100%;
     aspect-ratio: 840 / 868; /* jaga rasio */
     overflow: hidden;
-    border-radius: 8px;
 }
 
 .image-portrait img {
@@ -324,4 +330,71 @@ footer a:hover {
 
 .btn-primary {
     border-radius: 8px;
+}
+
+/* categori */
+
+/* wrapper scroll */
+.scroll-wrapper {
+    overflow-x: auto;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* row jadi horizontal */
+.scroll-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* column ukuran kayak bootstrap */
+.category-col {
+    flex: 0 0 25%; /* 4 item per layar */
+    max-width: 25%;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+    .category-col {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* card */
+.category-card {
+    height: 220px;
+    transition: 0.3s;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.scroll-row {
+    scroll-snap-type: x mandatory;
+}
+
+.category-col {
+    scroll-snap-align: start;
 }

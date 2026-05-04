@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Namecompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardNameCompany extends Controller
 {
@@ -34,8 +35,12 @@ class DashboardNameCompany extends Controller
             'namecompany' => 'required|max:150',
             'takeline' => 'required|max:255',
             'deccompany' => 'required|max:255',
+            'logo' => 'image|file|max:1024'
         ]);
 
+        if ($request->file('logo')) {
+            $validateData['logo'] = $request->file('logo')->store('logo-images');
+        }
 
         $validateData['user_id'] = auth()->user()->id;
 
@@ -71,10 +76,21 @@ class DashboardNameCompany extends Controller
             'namecompany' => 'required|max:150',
             'takeline' => 'required|max:255',
             'deccompany' => 'required|max:255',
+            'logo' => 'image|file|max:1024'
         ];
 
-
         $validateData = $request->validate($rules);
+
+        if ($request->file('logo')) {
+
+            // hapus lama
+            if ($request->oldLogo) {
+                Storage::delete($request->oldLogo);
+            }
+
+            // simpan baru
+            $validateData['logo'] = $request->file('logo')->store('logo-images');
+        }
 
 
         $validateData['user_id'] = auth()->user()->id;

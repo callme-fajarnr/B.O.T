@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('namecompany');
             $table->string('takeline');
             $table->string('deccompany');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

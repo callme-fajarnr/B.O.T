@@ -17,7 +17,11 @@
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
 
 
-    <title>{{ $tittle }}</title>
+    <title>{{ ucfirst($tittle ?? 'home') }} - {{ $company->namecompany ?? 'B.O.T' }}</title>
+
+    @if($company && $company->logo)
+        <link rel="icon" href="{{ asset('storage/'.$company->logo) }}">
+    @endif
   </head>
   <body>
 

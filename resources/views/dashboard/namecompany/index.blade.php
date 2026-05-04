@@ -42,6 +42,7 @@
                                 <th scope="col">Name Company</th>
                                 <th scope="col">Take Line</th>
                                 <th scope="col">Dec Company</th>
+                                <th scope="col">Logo</th>
                                 <th scope="col">Action</th>
                                 <th></th>
                             </tr>
@@ -50,9 +51,20 @@
                             @foreach ($namecom as $name)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $name->namecompany }}</td>
-                                <td>{{ $name->takeline }}</td>
-                                <td>{{ $name->deccompany }}</td>
+                                <td class="fw-semibold">{{ $name->namecompany }}</td>
+                                <td><span class="text-muted">{{ $name->takeline }}</span></td>
+                                <td style="max-width:250px;">
+                                    <small class="text-muted">
+                                        {{ Str::limit($name->deccompany, 60) }}
+                                    </small>
+                                </td>
+                                <td>
+                                    @if ($name->logo)
+                                        <img src="{{ asset('storage/' . $name->logo) }}" width="100">
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="/dashboard/namecompany/{{ $name->id }}/edit" class="btn btn-warning">
                                         <i class="bi bi-pencil"></i>

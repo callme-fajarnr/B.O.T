@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Namecompany;
+use Illuminate\Support\Facades\View;
 
 use App\Models\User;
 
@@ -27,8 +29,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
 
-        Gate::define('admin', function(User $user){
+        Gate::define('admin', function (User $user) {
             return $user->is_admin;
         });
+
+        View::share('company', Namecompany::latest()->first());
     }
 }

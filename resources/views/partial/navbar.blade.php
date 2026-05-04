@@ -20,9 +20,9 @@
               <a class="nav-link {{ $tittle === "project" ? 'active' : ''}}" href="/blog">Project</a>
             </li>
 
-            <li class="nav-item mb-2">
+            {{-- <li class="nav-item mb-2">
               <a class="nav-link {{ $tittle === "about" ? 'active' : ''}}" href="/cobaproject">Single Project</a>
-            </li>
+            </li> --}}
 
             <li class="nav-item mb-2">
               <a class="nav-link {{ $tittle === "about" ? 'active' : ''}}" href="/about">Aboute</a>
@@ -77,15 +77,14 @@
           </form>
 
           <!-- FOOTER OFFCANVAS -->
-          <div class="mt-4 pt-3 border-top small">
+          <div class="mt-4 pt-3 border-top small text-right">
             <p class="mb-1">Wanna talk to us?</p>
             <a href="https://www.instagram.com/pour.pictures/">Contact</a>
           </div>
 
           <!-- SOCIAL -->
-          <div class="mt-3 small">
+          <div class="mt-3 small text-right">
             <div class="row g-2">
-              <div class="col">Social</div>
               <div class="col">Social</div>
             </div>
           </div>

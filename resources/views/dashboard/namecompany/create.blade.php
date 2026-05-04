@@ -58,6 +58,22 @@
                     @enderror
                 </div>
 
+                <div class="col-12 mb-3">
+                    <label class="form-label">Logo</label>
+
+                    <img class="img-preview img-fluid mb-3 rounded"
+                        style="display:none; max-height:200px;">
+
+                    <input type="file"
+                        class="form-control @error('logo') is-invalid @enderror"
+                        name="logo"
+                        onchange="previewImage()">
+
+                    @error('logo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <!-- BUTTON -->
                 <div class="col-12 text-end mt-3">
                     <button type="submit" class="btn btn-primary px-4">
@@ -71,4 +87,16 @@
 
     </div>
 </div>
+
+<script>
+function previewImage(){
+    const image = document.querySelector('[name="logo"]');
+    const preview = document.querySelector('.img-preview');
+
+    if(image.files[0]){
+        preview.src = URL.createObjectURL(image.files[0]);
+        preview.style.display = 'block';
+    }
+}
+</script>
 @endsection
