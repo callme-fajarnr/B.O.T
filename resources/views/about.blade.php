@@ -1,103 +1,97 @@
 @extends('layout.main')
 
 @section('container')
-
-{{-- SECTION 1 --}}
-<div class="px-lg-3 py-lg-5 bg-body-dark">
-    <h1>{{ $about->line_1 }}</h1>
-</div>
-
-{{-- SECTION 2 --}}
-<div class="px-lg-5 py-lg-5 bg-body-dark">
-    <h3 class="fw-normal text-muted mb-3">
-        {{ $about->line_2 }}
-    </h3>
-</div>
-
-{{-- SECTION 3 --}}
-<div class="album py-lg-5 bg-body-dark">
-    <div class="px-lg-5">
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-
-            {{-- SOLO --}}
-            <div class="col">
-                <h3>SOLO & SIGHT</h3>
-                <p class="py-lg-5">{{ $about->solo_sight }}</p>
-            </div>
-
-            {{-- POST 1 --}}
-            <div class="col">
-                <a href="/blog/{{ $post[0]->slug }}">
-                    <img 
-                        src="{{ $post[0]->image ? asset('storage/'.$post[0]->image) : 'https://picsum.photos/512/683?'.$post[0]->category->name }}"
-                        class="img-fluid"
-                        width="447" height="595"
-                        alt="{{ $post[0]->category->name }}">
-
-                    <div class="card-body">
-                        <p>{{ $post[0]->excerpt }}</p>
-                        <h3>{{ $post[0]->tittle }}</h3>
-                    </div>
-                </a>
-            </div>
-
-            {{-- POST 2 --}}
-            <div class="col">
-                <a href="/blog/{{ $post[1]->slug }}">
-                    <img 
-                        src="{{ $post[1]->image ? asset('storage/'.$post[1]->image) : 'https://picsum.photos/512/683?'.$post[1]->category->name }}"
-                        class="img-fluid"
-                        width="447" height="595"
-                        alt="{{ $post[1]->category->name }}">
-
-                    <div class="card-body">
-                        <p>{{ $post[1]->excerpt }}</p>
-                        <h3>{{ $post[1]->tittle }}</h3>
-                    </div>
-                </a>
-            </div>
-
-        </div>
-
+    {{-- SECTION 1 --}}
+    <div class="px-lg-3 py-lg-5 bg-body-dark">
+        <h1>{{ $about->line_1 }}</h1>
     </div>
-</div>
 
-{{-- SECTION 4 --}}
-<div class="px-lg-5 py-lg-5 bg-body-dark">
-    <h3 class="fw-normal text-muted mb-3">
-        {{ $about->line_3 }}
-    </h3>
-</div>
+    {{-- SECTION 2 --}}
+    <div class="px-lg-5 py-lg-5 bg-body-dark">
+        <h3 class="fw-normal text-muted mb-3">
+            {{ $about->line_2 }}
+        </h3>
+    </div>
 
-{{-- SECTION 5 --}}
-<a href="/blog">
+    {{-- SECTION 3 --}}
     <div class="album py-lg-5 bg-body-dark">
-        <div class="px-lg-3">
+        <div class="px-lg-5">
 
-            <div class="card text-bg-dark">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
-                <img 
-                    src="{{ $about->image_about ? asset('storage/'.$about->image_about) : 'https://picsum.photos/1680/1120' }}"
-                    class="card-img-top"
-                    alt="Image">
+                {{-- SOLO --}}
+                <div class="col">
+                    <h3>SOLO & SIGHT</h3>
+                    <p class="py-lg-5">{{ $about->solo_sight }}</p>
+                </div>
 
-                <div class="card-img-overlay d-flex align-items-center">
-                    <div class="px-lg-5">
-                        <h4>See ur latest work</h4>
-                        <h2>THING WE DID IN THE PAST</h2>
-                        <h2 class="py-lg-5 text-decoration-underline">
-                            OUR PROJECT
-                        </h2>
-                    </div>
+                {{-- POST 1 --}}
+                <div class="col">
+                    <a href="/blog/{{ $post[0]->slug }}">
+                        <div class="image-card">
+                            <img src="{{ $post[0]->image ? asset('storage/' . $post[0]->image) : 'https://picsum.photos/512/683?' . $post[0]->category->name }}"
+                                class="img-fluid" width="447" height="595" alt="{{ $post[0]->category->name }}">
+                        </div>
+
+                        <div class="card-body">
+                            <p>{{ $post[0]->excerpt }}</p>
+                            <h3>{{ $post[0]->tittle }}</h3>
+                        </div>
+                    </a>
+                </div>
+
+                {{-- POST 2 --}}
+                <div class="col">
+                    <a href="/blog/{{ $post[1]->slug }}">
+                        <div class="image-card">
+                            <img src="{{ $post[1]->image ? asset('storage/' . $post[1]->image) : 'https://picsum.photos/512/683?' . $post[1]->category->name }}"
+                                class="img-fluid" width="447" height="595" alt="{{ $post[1]->category->name }}">
+                        </div>
+
+                        <div class="card-body">
+                            <p>{{ $post[1]->excerpt }}</p>
+                            <h3>{{ $post[1]->tittle }}</h3>
+                        </div>
+                    </a>
                 </div>
 
             </div>
 
         </div>
     </div>
-</a>
 
+    {{-- SECTION 4 --}}
+    <div class="px-lg-5 py-lg-5 bg-body-dark">
+        <h3 class="fw-normal text-muted mb-3">
+            {{ $about->line_3 }}
+        </h3>
+    </div>
+
+    {{-- SECTION 5 --}}
+    <a href="/blog">
+        <div class="album py-lg-5 bg-body-dark">
+            <div class="px-lg-3">
+
+                <div class="card text-bg-dark">
+
+                    <img src="{{ $about->image_about ? asset('storage/' . $about->image_about) : 'https://picsum.photos/1680/1120' }}"
+                        class="img-fluid w-100" alt="Image">
+
+                    <div class="card-img-overlay d-flex align-items-center">
+                        <div class="px-lg-5">
+                            <h4>See ur latest work</h4>
+                            <h2>THING WE DID IN THE PAST</h2>
+                            <h2 class="py-lg-5 text-decoration-underline">
+                                OUR PROJECT
+                            </h2>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </a>
 @endsection
 
 {{-- backup home --}}
@@ -254,5 +248,3 @@
   </div>
 </div>
 @endsection --}}
-
-

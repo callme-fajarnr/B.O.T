@@ -13,6 +13,10 @@ class HomeController extends Controller
     public function index()
     {
 
+        // dd([
+        //     'upload_max_filesize' => ini_get('upload_max_filesize'),
+        //     'post_max_size' => ini_get('post_max_size'),
+        // ]);
         //dd(request('search'));
         $tittle = '';
         if (request('category')) {

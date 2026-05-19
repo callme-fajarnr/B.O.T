@@ -47,19 +47,19 @@ class DashboardPostController extends Controller
             'image3' => 'image|file|max:1024',
             'image4' => 'image|file|max:1024',
             'image5' => 'image|file|max:1024',
-            'video' => 'nullable|file|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            'video' => 'nullable|file|mimes:mp4,webm,mov|max:51200',
             'link' => 'nullable',
             'body' => 'required',
-            'videoeditby' => 'nullable|required|max:50',
-            'igvideo' => 'required|max:100',
-            'photoby' => 'required|max:50',
-            'igphoto' => 'required|max:100',
-            'aktor1' => 'required|max:50',
-            'igaktor1' => 'required|max:100',
-            'aktor2' => 'required|max:50',
-            'igaktor2' => 'required|max:100',
-            'aktor3' => 'required|max:50',
-            'igaktor3' => 'required|max:100'
+            'videoeditby' => 'nullable|max:50',
+            'igvideo' => 'nullable|max:100',
+            'photoby' => 'nullable|max:50',
+            'igphoto' => 'nullable|max:100',
+            'aktor1' => 'nullable|max:50',
+            'igaktor1' => 'nullable|max:100',
+            'aktor2' => 'nullable|max:50',
+            'igaktor2' => 'nullable|max:100',
+            'aktor3' => 'nullable|max:50',
+            'igaktor3' => 'nullable|max:100'
         ]);
 
         $images = ['image', 'image2', 'image3', 'image4', 'image5'];
@@ -118,19 +118,19 @@ class DashboardPostController extends Controller
             'image3' => 'image|file|max:1024',
             'image4' => 'image|file|max:1024',
             'image5' => 'image|file|max:1024',
-            'video' => 'file|mimes:mp4,ogx,oga,ogv,ogg,webm',
+            'video' => 'nullable|file|mimes:mp4,webm,mov|max:51200',
             'link' => 'nullable',
             'body' => 'required',
-            'videoeditby' => 'nullable|required|max:50',
-            'igvideo' => 'required|max:100',
-            'photoby' => 'required|max:50',
-            'igphoto' => 'required|max:100',
-            'aktor1' => 'required|max:50',
-            'igaktor1' => 'required|max:100',
-            'aktor2' => 'required|max:50',
-            'igaktor2' => 'required|max:100',
-            'aktor3' => 'required|max:50',
-            'igaktor3' => 'required|max:100'
+            'videoeditby' => 'nullable|max:50',
+            'igvideo' => 'nullable|max:100',
+            'photoby' => 'nullable|max:50',
+            'igphoto' => 'nullable|max:100',
+            'aktor1' => 'nullable|max:50',
+            'igaktor1' => 'nullable|max:100',
+            'aktor2' => 'nullable|max:50',
+            'igaktor2' => 'nullable|max:100',
+            'aktor3' => 'nullable|max:50',
+            'igaktor3' => 'nullable|max:100'
         ];
 
         if ($request->slug != $post->slug) {

@@ -16,7 +16,8 @@ a {
 }
 
 a:hover {
-    text-decoration: none; /* opsional */
+    text-decoration: none;
+    /* opsional */
 }
 
 .container,
@@ -59,7 +60,8 @@ h5 {
 .logo-company {
     width: 100px;
     height: 100px;
-    object-fit: contain; /* 🔥 tetap utuh & transparan */
+    object-fit: contain;
+    /* 🔥 tetap utuh & transparan */
 }
 
 /* MOBILE → JANGAN DIPOTONG */
@@ -74,18 +76,21 @@ h5 {
 .carousel .carousel-item .card {
     width: 512px;
     height: 450px;
-    margin: auto; /* Untuk center di kolom */
+    margin: auto;
+    /* Untuk center di kolom */
     border: #000;
 }
 
 .carousel .carousel-item .card-img-top {
     width: 100%;
-    height: 80%; /* Atur sesuai rasio */
+    height: 80%;
+    /* Atur sesuai rasio */
     object-fit: cover;
 }
 
 .carousel .carousel-item .card-body {
-    height: 30%; /* Sisanya untuk teks */
+    height: 30%;
+    /* Sisanya untuk teks */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,20 +107,23 @@ h5 {
 /* ukuran foto */
 .image-card {
     width: 100%;
-    aspect-ratio: 3 / 4; /* sama kayak 512x683 */
+    aspect-ratio: 3 / 4;
+    /* sama kayak 512x683 */
     overflow: hidden;
 }
 
 .image-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ini kunci utamanya */
+    object-fit: cover;
+    /* ini kunci utamanya */
     display: block;
 }
 
 .image-card-43 {
     width: 100%;
-    aspect-ratio: 4 / 3; /* 792:594 */
+    aspect-ratio: 4 / 3;
+    /* 792:594 */
     overflow: hidden;
 }
 
@@ -129,15 +137,23 @@ h5 {
 .image-card-43 img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* crop biar rapi */
+    object-fit: contain;
+    /* crop biar rapi */
     display: block;
 }
 
 .img-792 {
     width: 100%;
     max-width: 792px;
-    aspect-ratio: 792 / 594;
+    height: 594px;
+    overflow: hidden;
+}
+
+.image-792 img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .img-512-tall {
@@ -151,7 +167,7 @@ h5 {
     width: 100%;
     max-width: 512px;
     aspect-ratio: 512 / 384;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .img-1680 {
@@ -219,6 +235,7 @@ h5 {
     from {
         transform: translateX(0);
     }
+
     to {
         transform: translateX(-50%);
     }
@@ -227,14 +244,17 @@ h5 {
 /* ukuran single post */
 .image-portrait {
     width: 100%;
-    aspect-ratio: 840 / 868; /* jaga rasio */
+    aspect-ratio: 840 / 868;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 
 .image-portrait img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* biar gak gepeng */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .image-landscape {
@@ -260,7 +280,8 @@ footer a:hover {
 
 /* navbar */
 .custom-navbar {
-    background: transparent !important; /* full transparan */
+    background: transparent !important;
+    /* full transparan */
     box-shadow: none;
 }
 
@@ -351,7 +372,8 @@ footer a:hover {
 
 /* column ukuran kayak bootstrap */
 .category-col {
-    flex: 0 0 25%; /* 4 item per layar */
+    flex: 0 0 25%;
+    /* 4 item per layar */
     max-width: 25%;
 }
 
