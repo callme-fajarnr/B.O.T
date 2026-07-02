@@ -132,10 +132,10 @@
                         <div class="col">
                             <a href="/blog/{{ $post[$i]->slug }}">
                                 @if ($post[$i]->image)
-                                    <img src="{{ asset('storage/' . $post[$i]->image) }}" class="img-fluid img-512-short">
+                                    <img src="{{ asset('storage/' . $post[$i]->image) }}" class="img-512-short">
                                 @else
                                     <img src="https://picsum.photos/512/384?{{ $post[$i]->category->name }}"
-                                        class="card-img-top img-512-short">
+                                        class="img-512-short">
                                 @endif
                                 <div class="card-body">
                                     <p>{{ $post[$i]->excerpt }}</p>

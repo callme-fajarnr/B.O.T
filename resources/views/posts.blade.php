@@ -53,7 +53,8 @@
 
             {{-- IMAGE --}}
             <div class="col-12 col-md-6">
-                <div class="image-portrait">
+                {{-- <div class="image-portrait"> --}}
+                <div class="image-card">
                     <img src="{{ $post->image ? asset('storage/' . $post->image) : 'https://picsum.photos/840/868' }}"
                         alt="">
                 </div>
@@ -89,14 +90,16 @@
         <div class="row g-3">
 
             <div class="col-12 col-md-6">
-                <div class="image-portrait">
+                {{-- <div class="image-portrait"> --}}
+                <div class="image-card">
                     <img src="{{ $post->image5 ? asset('storage/' . $post->image5) : 'https://picsum.photos/840/868' }}"
                         alt="">
                 </div>
             </div>
 
             <div class="col-12 col-md-6">
-                <div class="image-portrait">
+                {{-- <div class="image-portrait"> --}}
+                <div class="image-card">
                     <img src="{{ $post->image3 ? asset('storage/' . $post->image3) : 'https://picsum.photos/840/868' }}"
                         alt="">
                 </div>
@@ -112,7 +115,8 @@
 
             {{-- IMAGE --}}
             <div class="col-12 col-md-6">
-                <div class="image-portrait">
+                {{-- <div class="image-portrait"> --}}
+                <div class="image-card">
                     <img src="{{ $post->image2 ? asset('storage/' . $post->image2) : 'https://picsum.photos/840/868' }}"
                         alt="">
                 </div>

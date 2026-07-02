@@ -1,14 +1,32 @@
-<footer class="py-3 bg-dark text-white">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
+<footer class="footer-glass">
 
-        <div>
-            <strong>Vast B.O.T</strong>
-            <span class="text-white-50 small ms-2">v1.0</span>
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <span class="footer-dot"></span>
+
+            <div>
+                <div class="footer-title">
+                    Vast B.O.T
+                </div>
+
+                <div class="footer-subtitle">
+                    Admin Dashboard
+                </div>
+            </div>
         </div>
 
-        <div class="small text-white-50">
-            © {{ date('Y') }} Built with Love
+        <div class="footer-center">
+            <span class="footer-status">
+                <i class="bi bi-circle-fill"></i>
+                System Online
+            </span>
+        </div>
+
+        <div class="footer-copyright">
+            © {{ date('Y') }} Vast B.O.T
         </div>
 
     </div>
+
 </footer>

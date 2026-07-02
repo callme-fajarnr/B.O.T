@@ -1,90 +1,207 @@
 @extends('dashboard.layout.main')
 
 @section('container')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">My About</h1>
-</div>
+    <div class="dashboard-header mb-4">
 
-@if (session()->has('success'))
-<div class="alert alert-success col-lg-8" role="alert">
-  {{ session('success') }}
-</div>
-@endif
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-<div class="row">
-  <div class="col">
-      <div class="card">
-          <div class="card-header">
-              <i class="fa fa-align-justify"></i>
-              <a href="/dashboard/about/create" class="btn btn-primary mb-3"> Create New About</a>
-              {{-- <a href="/dashboard/post/createlink" class="btn btn-primary mb-3"> Create New Post Link</a> --}}
-          </div>
-          <div class="card-body" v-cloak>
-              <form @submit.prevent="">
-                  <div class="row justify-content-md-between">
-                      <div class="col col-lg-7 col-xl-5 form-group">
-                          <div class="input-group">
-                              <input class="form-control" placeholder="" v-model="search" />
-                              <span class="input-group-append">
-                                  <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp; Cari</button>
-                              </span>
-                          </div>
-                      </div>
-                      
-                  </div>
-              </form>
+            <div>
+                <h1 class="dashboard-title">
+                    Company <span>About</span>
+                </h1>
 
-              <div class="table-responsive">
-                <table class="table table-hover table-listing">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Line 1</th>
-                            <th scope="col">Line 2</th>
-                            <th scope="col">Line 3</th>
-                            <th scope="col">Solo & sight</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Created</th>
-                            <th scope="col">Action</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($about as $ab)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $ab->line_1 }}</td>
-                            <td>{{ $ab->line_2 }}</td>
-                            <td>{{ $ab->line_3 }}</td>
-                            <td>{{ $ab->solo_sight }}</td>
-                            <td>{{ $ab->image_about }}</td>
-                            <td>{{ $ab->created_at }}</td>
-                            <td>
-                                <a href="/dashboard/about/{{ $ab->id }}" class="btn btn-info">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-
-                                <a href="/dashboard/about/{{ $ab->id }}/edit" class="btn btn-warning">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-
-                                <form action="/dashboard/about/{{ $ab->id }}" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger border-0" onclick="return confirm('Are you sure?')">
-                                        <i class="bi bi-trash3"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <p class="dashboard-subtitle mb-0">
+                    Manage company profile, introduction and landing page information.
+                </p>
             </div>
 
-          </div>
-      </div>
-  </div>
-</div>
+            <a href="/dashboard/about/create" class="btn btn-primary px-4 py-2 rounded-4 shadow-sm">
+                <i class="bi bi-plus-circle me-2"></i>
+                Create About
+            </a>
 
-@endsection
+        </div>
+
+    </div>
+
+    @if (session()->has('success'))
+        <div class="alert glass-alert mb-4"> <i class="bi bi-check-circle-fill me-2"></i>
+            {{ session('success') }} </div>
+    @endif
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row mb-4">
+
+                <div class="col-lg-5">
+
+                    <div class="search-box">
+
+                        <i class="bi bi-search"></i>
+
+                        <input class="form-control" type="text" placeholder="Search company profile...">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card border-0">
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-listing align-middle">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>#</th>
+
+                                    <th>Company Intro</th>
+
+                                    <th>Headline</th>
+
+                                    <th>Subtitle</th>
+
+                                    <th>Solo & Sight</th>
+
+                                    <th class="text-center">
+                                        Image
+                                    </th>
+
+                                    <th>Created</th>
+
+                                    <th class="text-center">
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @forelse ($about as $ab)
+                                    <tr>
+
+                                        <td class="fw-semibold">
+                                            {{ Str::limit($ab->line_1, 40) }}
+                                        </td>
+
+                                        <td>
+                                            {{ Str::limit($ab->line_2, 35) }}
+                                        </td>
+
+                                        <td class="text-secondary">
+                                            {{ Str::limit($ab->line_3, 35) }}
+                                        </td>
+
+                                        <td>
+                                            <span class="badge bg-primary-subtle text-primary">
+                                                {{ Str::limit($ab->solo_sight, 20) }}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            {{ $ab->solo_sight }}
+                                        </td>
+
+                                        <td>
+
+                                            @if ($ab->image_about)
+                                                <img src="{{ asset('storage/' . $ab->image_about) }}"
+                                                    class="table-image rounded-4 shadow-sm" alt="">
+                                            @else
+                                                <div class="table-image-placeholder">
+                                                    <i class="bi bi-image"></i>
+                                                </div>
+                                            @endif
+
+                                        </td>
+
+                                        <td>
+                                            {{ $ab->created_at->format('d M Y') }}
+                                        </td>
+
+                                        <td>
+
+                                            <div class="action-group">
+
+                                                <a href="/dashboard/about/{{ $ab->id }}" class="btn-action view">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+
+                                                <a href="/dashboard/about/{{ $ab->id }}/edit" class="btn-action edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+
+                                                <form action="/dashboard/about/{{ $ab->id }}" method="POST"
+                                                    class="d-inline">
+
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button onclick="return confirm('Delete this data?')"
+                                                        class="btn-action delete">
+
+                                                        <i class="bi bi-trash"></i>
+
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                @empty
+
+                                    <tr>
+
+                                        <td colspan="8">
+
+                                            <div class="py-5 text-center">
+
+                                                <div class="empty-state">
+
+                                                    <i class="bi bi-folder2-open"></i>
+
+                                                </div>
+
+                                                <h5 class="mt-4 fw-bold">
+                                                    No About Data
+                                                </h5>
+
+                                                <p class="text-secondary">
+                                                    Start by creating your first company profile.
+                                                </p>
+
+                                                <a href="/dashboard/about/create" class="btn btn-primary mt-2">
+
+                                                    Create About
+
+                                                </a>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        @endsection

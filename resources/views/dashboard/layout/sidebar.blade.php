@@ -1,107 +1,99 @@
-<div class="sidebar col-md-3 col-lg-2 p-0 bg-body-tertiary">
-    <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
-        aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarMenuLabel">POUR PICTURES</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
-                aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+<div class="sidebar">
+    <div class="sidebar-glass" id="sidebarMenu">
+
+        <div class="sidebar-content">
+
             <ul class="nav flex-column">
+
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active {{ Request::is('dashboard') ? 'active' : '' }}"
-                        aria-current="page" href="/dashboard">
-                        <svg class="bi">
-                            <use xlink:href="#house-fill" />
-                        </svg>
-                        Dashboard
+                    <a href="/dashboard" class="nav-link sidebar-link {{ Request::is('dashboard') ? 'active' : '' }}">
+                        <i class="bi bi-house-fill"></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/banner*') ? 'active' : '' }}"
-                        href="/dashboard/banner">
+                    <a href="/dashboard/banner"
+                        class="nav-link sidebar-link {{ Request::is('dashboard/banner*') ? 'active' : '' }}">
                         <i class="bi bi-window"></i>
-                        Banner
+                        <span>Banner</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/post*') ? 'active' : '' }}"
-                        href="/dashboard/post">
-                        <svg class="bi">
-                            <use xlink:href="#file-earmark" />
-                        </svg>
-                        My Post
+                    <a href="/dashboard/post"
+                        class="nav-link sidebar-link {{ Request::is('dashboard/post*') ? 'active' : '' }}">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>My Post</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/post-link*') ? 'active' : '' }}"
-                        href="/dashboard/post-link">
-                        <svg class="bi">
-                            <use xlink:href="#file-earmark" />
-                        </svg>
-                        My Post Link
-                    </a>
-                </li> --}}
+
             </ul>
 
             @can('admin')
-                <h6
-                    class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                    <span>Admnistrator</span>
-                </h6>
+                <div class="sidebar-section">
+                    Administrator
+                </div>
 
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/categories*') ? 'active' : '' }}"
-                            href="/dashboard/categories">
-                            <i class="bi bi-plus-square"></i>
-                            Add Category
-                        </a>
-                    </li>
-                </ul>
 
-                <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/namecompany*') ? 'active' : '' }}"
-                            href="/dashboard/namecompany">
-                            <i class="bi bi-boxes"></i>
-                            Nama Company
+                        <a href="/dashboard/categories"
+                            class="nav-link sidebar-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}">
+                            <i class="bi bi-grid"></i>
+                            <span>Add Category</span>
                         </a>
                     </li>
-                </ul>
 
-                <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/about*') ? 'active' : '' }}"
-                            href="/dashboard/about">
-                            <i class="bi bi-house-gear-fill"></i>
-                            About
+                        <a href="/dashboard/namecompany"
+                            class="nav-link sidebar-link {{ Request::is('dashboard/namecompany*') ? 'active' : '' }}">
+                            <i class="bi bi-buildings"></i>
+                            <span>Nama Company</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="/dashboard/about"
+                            class="nav-link sidebar-link {{ Request::is('dashboard/about*') ? 'active' : '' }}">
+                            <i class="bi bi-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+
                 </ul>
             @endcan
 
+            <hr>
 
-            <hr class="my-3">
+            <ul class="nav flex-column">
 
-            <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="/dashboard/user" class="nav-link d-flex align-items-center gap-2">
+                    <a href="/dashboard/user"
+                        class="nav-link sidebar-link {{ Request::is('dashboard/user*') ? 'active' : '' }}">
                         <i class="bi bi-people"></i>
-                        Management Akun
+                        <span>Management Akun</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <form action="/logout" method="post">
+
+                    <form action="/logout" method="POST">
                         @csrf
-                        <button type="submit" class="nav-link px-3 border-0"><i class="bi bi-box-arrow-in-left"></i>
-                            Logout</button>
+
+                        <button type="submit" class="nav-link sidebar-link border-0 bg-transparent w-100 text-start">
+
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+
+                        </button>
                     </form>
+
                 </li>
+
             </ul>
+
         </div>
+
     </div>
 </div>

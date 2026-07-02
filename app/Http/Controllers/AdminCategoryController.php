@@ -47,7 +47,7 @@ class AdminCategoryController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('category-images');
+            $validateData['image'] = $request->file('image')->store('category-images', 'public');
         }
 
         Category::create($validateData);
@@ -93,9 +93,9 @@ class AdminCategoryController extends Controller
 
         if ($request->file('image')) {
             if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+                Storage::disk('public')->delete($request->oldImage);
             }
-            $validateData['image'] = $request->file('image')->store('category-images');
+            $validateData['image'] = $request->file('image')->store('category-images', 'public');
         }
 
         Category::where('id', $category->id)
@@ -115,7 +115,8 @@ class AdminCategoryController extends Controller
     }
 
     // slug cek atuo scrip
-    public function checkSlug(Request $request){
+    public function checkSlug(Request $request)
+    {
         $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
     }

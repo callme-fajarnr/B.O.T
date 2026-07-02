@@ -1,102 +1,141 @@
 @extends('dashboard.layout.main')
 
 @section('container')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit Category</h1>
-</div>
+    <div class="dashboard-header mb-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-<div class="col-lg-8">
-    <div class="card shadow-sm border-0">
-        <div class="card-body">
+            <div>
+                <h1 class="dashboard-title">
+                    Edit <span>Category</span>
+                </h1>
 
-            <form action="/dashboard/categories/{{ $category->slug }}" method="POST" class="mb-3" enctype="multipart/form-data">
-                @method('put')
+                <p class="dashboard-subtitle mb-0">
+                    Update category information and logo.
+                </p>
+            </div>
+
+            <a href="{{ route('categories.index') }}" class="btn btn-light rounded-4 px-4 shadow-sm">
+                <i class="bi bi-arrow-left me-2"></i>
+                Back
+            </a>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body p-4">
+
+            <form action="/dashboard/categories/{{ $category->slug }}" method="POST" enctype="multipart/form-data">
+
                 @csrf
+                @method('PUT')
 
-                <div class="mb-4">
-                    <label for="name" class="form-label fw-semibold">Name</label>
-                    <input type="text"
-                        class="form-control @error('name') is-invalid @enderror"
-                        id="tittle" name="name"
-                        value="{{ old('name', $category->name) }}" required autofocus>
+                <input type="hidden" name="oldImage" value="{{ $category->image }}">
 
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+                <div class="row g-4">
 
-                <div class="mb-4">
-                    <label for="slug" class="form-label fw-semibold">Slug</label>
-                    <input type="text"
-                        class="form-control @error('slug') is-invalid @enderror"
-                        id="slug" name="slug"
-                        value="{{ old('slug', $category->slug) }}" required>
+                    {{-- NAME --}}
+                    <div class="col-md-6">
 
-                    @error('slug')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+                        <label class="form-label fw-semibold">
+                            Category Name
+                        </label>
 
-                <div class="mb-4">
-                    <label for="image" class="form-label fw-semibold">Logo Category</label>
+                        <input type="text" id="tittle" name="name" value="{{ old('name', $category->name) }}"
+                            class="form-control @error('name') is-invalid @enderror" placeholder="Input category name"
+                            required autofocus>
 
-                    <input type="hidden" name="oldImage" value="{{ $category->image }}">
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
-                    <div class="mb-2">
-                        @if ($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}"
-                                class="img-preview img-fluid rounded border d-block"
-                                style="max-height: 180px;">
-                        @else    
-                            <img class="img-preview img-fluid rounded border d-none"
-                                style="max-height: 180px;">
-                        @endif
                     </div>
 
-                    <input type="file"
-                        class="form-control @error('image') is-invalid @enderror"
-                        id="image" name="image"
-                        onchange="previewImage()">
+                    {{-- SLUG --}}
+                    <div class="col-md-6">
 
-                    @error('image')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                        <label class="form-label fw-semibold">
+                            Slug
+                        </label>
+
+                        <input type="text" id="slug" name="slug" value="{{ old('slug', $category->slug) }}"
+                            class="form-control @error('slug') is-invalid @enderror" placeholder="Generated slug" required>
+
+                        @error('slug')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- IMAGE --}}
+                    <div class="border rounded-4 p-4 bg-light">
+
+                        <div class="text-center">
+
+                            @if ($category->image)
+                                <img id="imgPreview" src="{{ asset('storage/' . $category->image) }}"
+                                    class="img-fluid rounded-4 shadow-sm mb-3"
+                                    style="display:block;max-width:100%;max-height:220px;margin:auto;object-fit:contain;">
+                            @else
+                                <img id="imgPreview" class="img-fluid rounded-4 shadow-sm mb-3"
+                                    style="display:none;max-width:100%;max-height:220px;margin:auto;object-fit:contain;">
+                            @endif
+
+                        </div>
+
+                        <input type="file" id="image" name="image"
+                            class="form-control @error('image') is-invalid @enderror" onchange="previewImage()">
+
+                        <small class="text-muted d-block mt-2 text-center">
+                            Leave empty if you don't want to change the logo.
+                        </small>
+
+                    </div>
+
                 </div>
 
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary px-4">
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a href="{{ route('categories.index') }}" class="btn btn-light rounded-4 px-4">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="btn btn-primary rounded-4 px-4">
+                        <i class="bi bi-check-circle me-2"></i>
                         Update Category
                     </button>
+
                 </div>
 
             </form>
 
         </div>
     </div>
-</div>
 
-<script>
-const tittle = document.querySelector('#tittle');
-const slug = document.querySelector('#slug');
+    <script>
+        const tittle = document.querySelector('#tittle');
+        const slug = document.querySelector('#slug');
 
-tittle.addEventListener('change', function(){
-    fetch('/dashboard/post/checkSlug?tittle=' + tittle.value)
-    .then(response => response.json())
-    .then(data => slug.value = data.slug)
-});
+        tittle.addEventListener('change', function() {
+            fetch('/dashboard/post/checkSlug?tittle=' + tittle.value)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
 
-function previewImage(){
-    const image = document.querySelector('#image');
-    const imgPreview = document.querySelector('.img-preview');
+        function previewImage() {
+            const image = document.getElementById('image');
+            const preview = document.getElementById('imgPreview');
 
-    imgPreview.classList.remove('d-none');
-
-    const reader = new FileReader();
-    reader.readAsDataURL(image.files[0]);
-
-    reader.onload = function(e){
-        imgPreview.src = e.target.result;
-    }
-}
-</script>
+            if (image.files.length > 0) {
+                preview.src = URL.createObjectURL(image.files[0]);
+                preview.style.display = 'block';
+            }
+        }
+    </script>
 @endsection

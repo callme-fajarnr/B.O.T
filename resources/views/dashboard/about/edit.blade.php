@@ -1,94 +1,205 @@
 @extends('dashboard.layout.main')
 
 @section('container')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit About</h1>
-</div>
+    {{-- HEADER --}}
+    <div class="dashboard-header mb-4">
 
-<div class="card shadow-sm border-0">
-    <div class="card-body">
-        <form action="/dashboard/about/{{ $about->id }}" method="POST" enctype="multipart/form-data">
-            @method('put')
-            @csrf
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-            <div class="row g-3">
+            <div>
 
-                <!-- LEFT -->
-                <div class="col-md-6">
-                    <label class="form-label">Line 1</label>
-                    <input type="text" class="form-control @error('line_1') is-invalid @enderror"
-                        name="line_1" value="{{ old('line_1', $about->line_1) }}">
-                    @error('line_1') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
+                <span class="badge rounded-pill bg-warning-subtle text-warning mb-2 px-3 py-2">
+                    EDIT
+                </span>
 
-                <div class="col-md-6">
-                    <label class="form-label">Line 2</label>
-                    <input type="text" class="form-control @error('line_2') is-invalid @enderror"
-                        name="line_2" value="{{ old('line_2', $about->line_2) }}">
-                    @error('line_2') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
+                <h1 class="dashboard-title mb-1">
+                    Edit About
+                </h1>
 
-                <div class="col-md-6">
-                    <label class="form-label">Line 3</label>
-                    <input type="text" class="form-control @error('line_3') is-invalid @enderror"
-                        name="line_3" value="{{ old('line_3', $about->line_3) }}">
-                    @error('line_3') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-
-                <div class="col-md-6">
-                    <label class="form-label">Solo & Sight</label>
-                    <input type="text" class="form-control @error('solo_sight') is-invalid @enderror"
-                        name="solo_sight" value="{{ old('solo_sight', $about->solo_sight) }}">
-                    @error('solo_sight') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-
-                <!-- IMAGE FULL WIDTH -->
-                <div class="col-12">
-                    <label class="form-label">Image About</label>
-
-                    <input type="hidden" name="oldImage" value="{{ $about->image_about }}">
-
-                    @if ($about->image_about)
-                        <img src="{{ asset('storage/' . $about->image_about) }}"
-                            class="img-preview img-fluid mb-3 d-block" style="max-height: 200px;">
-                    @else
-                        <img class="img-preview img-fluid mb-3 d-none" style="max-height: 200px;">
-                    @endif
-
-                    <input class="form-control @error('image_about') is-invalid @enderror"
-                        type="file" id="image_about" name="image_about"
-                        onchange="previewImage_about()">
-
-                    @error('image_about')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- BUTTON -->
-                <div class="col-12 text-end">
-                    <button type="submit" class="btn btn-primary px-4">
-                        Update About
-                    </button>
-                </div>
+                <p class="dashboard-subtitle mb-0">
+                    Update your company introduction and landing page information.
+                </p>
 
             </div>
-        </form>
+
+            <a href="/dashboard/about" class="btn btn-light rounded-4 px-4 shadow-sm">
+
+                <i class="bi bi-arrow-left me-2"></i>
+
+                Back
+
+            </a>
+
+        </div>
+
     </div>
-</div>
 
-<script>
-function previewImage_about(){
-    const image = document.querySelector('#image_about');
-    const imgPreview = document.querySelector('.img-preview');
+    {{-- FORM --}}
+    <div class="card border-0 shadow-sm">
 
-    imgPreview.classList.remove('d-none');
+        <div class="card-body p-4">
 
-    const reader = new FileReader();
-    reader.readAsDataURL(image.files[0]);
+            <form action="/dashboard/about/{{ $about->id }}" method="POST" enctype="multipart/form-data">
 
-    reader.onload = function(e){
-        imgPreview.src = e.target.result;
-    }
-}
-</script>
+                @csrf
+                @method('PUT')
+
+                <input type="hidden" name="oldImage" value="{{ $about->image_about }}">
+
+                <div class="row g-4">
+
+                    {{-- Line 1 --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-semibold">
+                            Line 1
+                        </label>
+
+                        <input type="text" name="line_1" value="{{ old('line_1', $about->line_1) }}"
+                            class="form-control form-control-lg @error('line_1') is-invalid @enderror"
+                            placeholder="Enter first line">
+
+                        @error('line_1')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- Line 2 --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-semibold">
+                            Line 2
+                        </label>
+
+                        <input type="text" name="line_2" value="{{ old('line_2', $about->line_2) }}"
+                            class="form-control form-control-lg @error('line_2') is-invalid @enderror"
+                            placeholder="Enter second line">
+
+                        @error('line_2')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- Line 3 --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-semibold">
+                            Line 3
+                        </label>
+
+                        <input type="text" name="line_3" value="{{ old('line_3', $about->line_3) }}"
+                            class="form-control form-control-lg @error('line_3') is-invalid @enderror"
+                            placeholder="Enter third line">
+
+                        @error('line_3')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- Solo --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-semibold">
+                            Solo & Sight
+                        </label>
+
+                        <input type="text" name="solo_sight" value="{{ old('solo_sight', $about->solo_sight) }}"
+                            class="form-control form-control-lg @error('solo_sight') is-invalid @enderror"
+                            placeholder="Example : Explore Together">
+
+                        @error('solo_sight')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- IMAGE --}}
+                    <div class="col-12">
+
+                        <label class="form-label fw-semibold">
+                            About Image
+                        </label>
+
+                        <div class="upload-card">
+
+                            @if ($about->image_about)
+                                <img src="{{ asset('storage/' . $about->image_about) }}"
+                                    class="img-preview rounded-4 shadow-sm d-block">
+                            @else
+                                <img class="img-preview rounded-4 shadow-sm">
+                            @endif
+
+                            <input id="image_about" type="file" name="image_about"
+                                class="form-control mt-3 @error('image_about') is-invalid @enderror"
+                                onchange="previewImage_about()">
+
+                            <small class="text-secondary mt-2 d-block">
+                                Leave empty if you don't want to change the image.
+                            </small>
+
+                            @error('image_about')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr class="my-5">
+
+                <div class="d-flex justify-content-end gap-3">
+
+                    <a href="/dashboard/about" class="btn btn-light rounded-4 px-4">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit" class="btn btn-warning rounded-4 px-5">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                        Update About
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+        function previewImage_about() {
+
+            const image = document.querySelector('#image_about');
+            const preview = document.querySelector('.img-preview');
+
+            if (image.files.length > 0) {
+
+                preview.src = URL.createObjectURL(image.files[0]);
+
+                preview.style.display = "block";
+
+            }
+
+        }
+    </script>
 @endsection

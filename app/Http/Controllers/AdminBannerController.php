@@ -39,7 +39,7 @@ class AdminBannerController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('banner-images');
+            $validateData['image'] = $request->file('image')->store('banner-images', 'public');
         }
         $validateData['is_active'] = $request->has('is_active');
 
@@ -81,12 +81,12 @@ class AdminBannerController extends Controller
         $validateData['is_active'] = $request->has('is_active');
 
         if ($request->file('image')) {
-
             if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+                Storage::disk('public')->delete($request->oldImage);
             }
 
-            $validateData['image'] = $request->file('image')->store('banner-images');
+            $validateData['image'] = $request->file('image')
+                ->store('banner-images', 'public');
         }
 
         Banner::where('id', $banner->id)->update($validateData);

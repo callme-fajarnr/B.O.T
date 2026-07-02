@@ -1,102 +1,164 @@
 @extends('dashboard.layout.main')
 
 @section('container')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">New Name Company</h1>
-</div>
+    <div class="dashboard-header mb-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-<div class="card shadow-sm border-0">
-    <div class="card-body">
+            <div>
+                <h1 class="dashboard-title">
+                    Create <span>Company</span>
+                </h1>
 
-        <form action="/dashboard/namecompany" method="POST" enctype="multipart/form-data">
-            @csrf
-
-            <div class="row g-3">
-
-                <!-- NAME COMPANY -->
-                <div class="col-md-6">
-                    <label class="form-label">Name Company</label>
-                    <input type="text"
-                        class="form-control @error('namecompany') is-invalid @enderror"
-                        id="namecompany"
-                        name="namecompany"
-                        value="{{ old('namecompany') }}"
-                        required autofocus>
-
-                    @error('namecompany')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- TAKE LINE -->
-                <div class="col-md-6">
-                    <label class="form-label">Take Line</label>
-                    <input type="text"
-                        class="form-control @error('takeline') is-invalid @enderror"
-                        id="takeline"
-                        name="takeline"
-                        value="{{ old('takeline') }}"
-                        required>
-
-                    @error('takeline')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- DESCRIPTION -->
-                <div class="col-12">
-                    <label class="form-label">Dec Company</label>
-                    <textarea
-                        class="form-control @error('deccompany') is-invalid @enderror"
-                        id="deccompany"
-                        name="deccompany"
-                        rows="3"
-                        required>{{ old('deccompany') }}</textarea>
-
-                    @error('deccompany')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="col-12 mb-3">
-                    <label class="form-label">Logo</label>
-
-                    <img class="img-preview img-fluid mb-3 rounded"
-                        style="display:none; max-height:200px;">
-
-                    <input type="file"
-                        class="form-control @error('logo') is-invalid @enderror"
-                        name="logo"
-                        onchange="previewImage()">
-
-                    @error('logo')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- BUTTON -->
-                <div class="col-12 text-end mt-3">
-                    <button type="submit" class="btn btn-primary px-4">
-                        Create Post
-                    </button>
-                </div>
-
+                <p class="dashboard-subtitle mb-0">
+                    Add your company information and upload the company logo.
+                </p>
             </div>
 
-        </form>
+            <a href="{{ route('namecompany.index') }}" class="btn btn-light rounded-4 px-4 shadow-sm">
+
+                <i class="bi bi-arrow-left me-2"></i>
+                Back
+
+            </a>
+
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="card-body p-4">
+
+            <form action="/dashboard/namecompany" method="POST" enctype="multipart/form-data">
+
+                @csrf
+
+                <div class="row g-4">
+
+                    {{-- NAME COMPANY --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-semibold">
+                            Company Name
+                        </label>
+
+                        <input type="text" id="namecompany" name="namecompany" value="{{ old('namecompany') }}"
+                            class="form-control @error('namecompany') is-invalid @enderror" placeholder="Input company name"
+                            required autofocus>
+
+                        @error('namecompany')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- TAGLINE --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-semibold">
+                            Tagline
+                        </label>
+
+                        <input type="text" id="takeline" name="takeline" value="{{ old('takeline') }}"
+                            class="form-control @error('takeline') is-invalid @enderror" placeholder="Input company tagline"
+                            required>
+
+                        @error('takeline')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- DESCRIPTION --}}
+                    <div class="col-12">
+
+                        <label class="form-label fw-semibold">
+                            Company Description
+                        </label>
+
+                        <textarea name="deccompany" rows="5" class="form-control @error('deccompany') is-invalid @enderror"
+                            placeholder="Write company description..." required>{{ old('deccompany') }}</textarea>
+
+                        @error('deccompany')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- LOGO --}}
+                    <div class="col-12">
+
+                        <label class="form-label fw-semibold">
+                            Company Logo
+                        </label>
+
+                        <div class="border rounded-4 p-4 bg-light text-center">
+
+                            <img id="imgPreview" class="img-fluid rounded-4 shadow-sm mb-3"
+                                style="display:none;max-height:220px;">
+
+                            <input type="file" id="logo" name="logo"
+                                class="form-control @error('logo') is-invalid @enderror" onchange="previewImage()">
+
+                            <small class="text-muted d-block mt-2">
+                                Upload PNG, JPG or JPEG (Maximum 2 MB).
+                            </small>
+
+                        </div>
+
+                        @error('logo')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a href="{{ route('namecompany.index') }}" class="btn btn-light rounded-4 px-4">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit" class="btn btn-primary rounded-4 px-4">
+
+                        <i class="bi bi-check-circle me-2"></i>
+                        Create Company
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
-</div>
 
-<script>
-function previewImage(){
-    const image = document.querySelector('[name="logo"]');
-    const preview = document.querySelector('.img-preview');
+    <script>
+        function previewImage() {
 
-    if(image.files[0]){
-        preview.src = URL.createObjectURL(image.files[0]);
-        preview.style.display = 'block';
-    }
-}
-</script>
+            const image = document.getElementById('logo');
+            const preview = document.getElementById('imgPreview');
+
+            if (image.files.length > 0) {
+
+                preview.src = URL.createObjectURL(image.files[0]);
+                preview.style.display = 'block';
+
+            }
+
+        }
+    </script>
 @endsection

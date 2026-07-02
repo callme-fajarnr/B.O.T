@@ -137,9 +137,10 @@ h5 {
 .image-card-43 img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    /* crop biar rapi */
-    display: block;
+    object-fit: cover;
+    /* isi penuh box */
+    object-position: center top;
+    display: block
 }
 
 .img-792 {
@@ -167,7 +168,17 @@ h5 {
     width: 100%;
     max-width: 512px;
     aspect-ratio: 512 / 384;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+.img-512-short img {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .img-1680 {
@@ -245,16 +256,15 @@ h5 {
 .image-portrait {
     width: 100%;
     aspect-ratio: 840 / 868;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
 }
 
 .image-portrait img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
 }
 
 .image-landscape {
